@@ -1,9 +1,11 @@
+require('dotenv-safe').config();
+
 const express = require('express');
 const routes = require('./routes');
 const path = require('path');
 
 const app = new express();
-const port = 3000;
+const port = process.env.PORT;
 
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded

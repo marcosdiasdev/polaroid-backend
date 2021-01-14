@@ -3,6 +3,7 @@ const connection = require('./Connection');
 module.exports = {
   
   getAll() {
+    console.log(connection);
     return new Promise((resolve, reject) => {
       connection.query('SELECT * FROM marca', (error, results, fields) => {
         if (error) reject(error);
