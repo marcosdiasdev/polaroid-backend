@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `polaroid`.`photo` (
   `description` TEXT NULL,
   `user_id` INT NOT NULL,
   `url` VARCHAR(255) NOT NULL,
-  `created_at` DATETIME NOT NULL,
+  `created_at` DATETIME NOT NULL DEFAULT NOW(),
   PRIMARY KEY (`id`),
   INDEX `fk_photo_user_idx` (`user_id` ASC),
   CONSTRAINT `fk_photo_user`
