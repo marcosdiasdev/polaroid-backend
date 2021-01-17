@@ -1,7 +1,7 @@
 exports.cookieConfig = {
   httpOnly: true,
-  signed: true, // with a secret key for cookieParser
-  secure: false, // to force https
+  signed: true,
+  secure: false,
 };
 
 exports.jwtOptions = {

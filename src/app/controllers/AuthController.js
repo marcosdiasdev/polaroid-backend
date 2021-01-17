@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const UserDAO = require('../dao/UserDAO');
-const { hashPassword, comparePassword } = require('../util/auth');
+const { hashPassword, comparePassword } = require('../util/hash');
 const { userSchema, credentialsSchema } = require('../schemas/schemas');
 const { cookieConfig, jwtOptions, secret } = require('../config/config');
 
@@ -10,7 +10,7 @@ module.exports = {
     try {
       const user = await userSchema.validateAsync(req.body);
       user.password = await hashPassword(user.password);
-      const [result] = await UserDAO.store(user);
+      const [result] = await UserDAO.createUser(user);
       res.json({id: result.insertId});
     } catch (error) {
       console.error(error);
@@ -21,7 +21,7 @@ module.exports = {
   async authenticate(req, res) {
     try {
       const credentials = await credentialsSchema.validateAsync(req.body);
-      const [result] = await UserDAO.getByEmail(credentials.email);
+      const [result] = await UserDAO.getUserByEmail(credentials.email);
 
       if(result.length > 0 && await comparePassword(credentials.password, result[0].password)) {
         

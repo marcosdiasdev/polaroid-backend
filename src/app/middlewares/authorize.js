@@ -1,7 +1,7 @@
 const secret = process.env.SECRET;
 const jwt = require('jsonwebtoken');
 
-exports.authorize = (req, res, next) => {
+module.exports = (req, res, next) => {
   
   const token = req.signedCookies.token;
   if(!token) {
