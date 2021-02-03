@@ -3,11 +3,11 @@ const pool = require('../database/Pool');
 module.exports = {
 
   getUserById(id) {
-    return pool.query('SELECT name, surname, email, created_at FROM usuario WHERE id = ?', id);
+    return pool.query('SELECT name, lastname, email, created_at FROM usuario WHERE id = ?', id);
   },
 
   getUserByEmail(email) {
-    return pool.query('SELECT id, name, surname, password, created_at FROM user WHERE email = ?', email);
+    return pool.query('SELECT id, name, lastname, password, created_at FROM user WHERE email = ?', email);
   },
 
   createUser(user) {

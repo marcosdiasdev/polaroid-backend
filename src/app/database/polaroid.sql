@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `polaroid`.`user` ;
 CREATE TABLE IF NOT EXISTS `polaroid`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
-  `surname` VARCHAR(60) NULL,
+  `lastname` VARCHAR(60) NULL,
   `birth` DATE NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NULL,
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `polaroid`.`photo` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `description` TEXT NULL,
   `user_id` INT NOT NULL,
-  `url` VARCHAR(255) NOT NULL,
+  `path` VARCHAR(255) NOT NULL,
   `created_at` DATETIME NOT NULL DEFAULT NOW(),
   PRIMARY KEY (`id`),
   INDEX `fk_photo_user_idx` (`user_id` ASC),
@@ -63,6 +63,6 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `polaroid`;
-INSERT INTO `polaroid`.`user` (`id`, `name`, `surname`, `birth`, `email`, `password`, `created_at`) VALUES (DEFAULT, 'Wade', 'Winston Wilson', '1980-03-01', 'deadpool@marvel.com', '$2b$10$OPfnydWgBkKfbvwYahG9F.PPaZsqK.4906OcZnKsMGE5gAJjHNiJu', '2021-01-14 23:49:00');
+INSERT INTO `polaroid`.`user` (`id`, `name`, `lastname`, `birth`, `email`, `password`, `created_at`) VALUES (DEFAULT, 'Wade', 'Winston Wilson', '1980-03-01', 'deadpool@marvel.com', '$2b$10$OPfnydWgBkKfbvwYahG9F.PPaZsqK.4906OcZnKsMGE5gAJjHNiJu', '2021-01-14 23:49:00');
 
 COMMIT;

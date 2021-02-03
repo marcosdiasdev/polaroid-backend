@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 exports.userSchema = Joi.object({
   name: Joi.string().required(),
-  surname: Joi.string().required(),
+  lastname: Joi.string().required(),
   birth: Joi.date().required(),
   email: Joi.string().email().required(),
   password: Joi.string().required()

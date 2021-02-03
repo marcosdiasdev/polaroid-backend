@@ -1,4 +1,4 @@
-# Polaroid 📸
+# Polaroid (backend) 📸
 
 ## Running this application
 

@@ -18,7 +18,7 @@ module.exports = {
     }
   },
 
-  async authenticate(req, res) {
+  async login(req, res) {
     try {
       const credentials = await credentialsSchema.validateAsync(req.body);
       const [result] = await UserDAO.getUserByEmail(credentials.email);
@@ -28,14 +28,34 @@ module.exports = {
         const payload = {
           "user_id": result[0].id
         };
-        const token = jwt.sign(payload, secret, jwtOptions);
-        console.log(token);
+        const token = jwt.sign(payload, secret, { expiresIn: "30 minutes" });
+        console.log('User authenticated');
         res.cookie('token', token, cookieConfig);
-        res.json({name: result[0].name, surname: result[0].surname});
+        res.json({
+          id: result[0].id,
+          name: result[0].name, 
+          lastname: result[0].lastname, 
+          expiresIn: new Date(Date.now() + 30 * 60 * 1000)
+        });
 
       } else {
         res.status(401).json({ message: 'Invalid credentials'});
       }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  async logout(req, res) {
+    try {
+      const token = req.signedCookies.token;
+      if(!token) {
+        return res.status(401).send({ auth: false, message: "No token provided"});
+      }
+      res.cookie('token', null, {maxAge: 0});
+      res.json({auth: false, message: 'User logged out'});
+
     } catch (error) {
       console.log(error);
       res.status(500).json(error);

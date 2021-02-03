@@ -1,7 +1,11 @@
 const pool = require('../database/Pool');
 
 module.exports = {
-  
+
+  getAllPhotos() {
+    return pool.query('SELECT * FROM photo');
+  },
+
   getUserPhotos(user_id) {
     return pool.query('SELECT * FROM photo WHERE user_id = ?', user_id);
   },

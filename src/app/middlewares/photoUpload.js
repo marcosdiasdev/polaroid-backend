@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
     req.photo = {
       description: fields.description,
       user_id: req.user_id,
-      url: files.file.path.split('/').slice(-1),
+      path: files.file.path.split('/').slice(-1),
     }
     
     next();         

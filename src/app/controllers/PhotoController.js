@@ -2,6 +2,15 @@ const PhotoDAO = require('../dao/PhotoDAO');
 
 module.exports = {
   
+  async index(req, res) {
+    try {
+      const [results] = await PhotoDAO.getAllPhotos();
+      res.json(results);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+
   async userIndex(req, res) {
     try {
       const [results] = await PhotoDAO.getUserPhotos(req.user_id);
@@ -20,7 +29,7 @@ module.exports = {
     }
   },  
 
-  async store(req, res) { 
+  async store(req, res) {
     try {
       const [result] = await PhotoDAO.createPhoto(req.photo);
       res.json(result);    
